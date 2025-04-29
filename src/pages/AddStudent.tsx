@@ -13,6 +13,7 @@ const AddStudent: React.FC = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
   const [name, setName] = useState('');
+  const [classroom, setClassroom] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   
   const handleSubmit = async (e: React.FormEvent) => {
@@ -28,15 +29,16 @@ const AddStudent: React.FC = () => {
         .insert({
           user_id: user.id,
           name: name.trim(),
+          classroom: classroom.trim(),
         });
       
       if (error) throw error;
       
-      toast.success('Student added successfully!');
+      toast.success('Aluno adicionado com sucesso!');
       navigate('/students');
     } catch (error) {
-      console.error('Error adding student:', error);
-      toast.error('Failed to add student. Please try again.');
+      console.error('Erro ao adicionar aluno:', error);
+      toast.error('Falha ao adicionar aluno. Tente novamente.');
     } finally {
       setIsSubmitting(false);
     }
@@ -47,19 +49,27 @@ const AddStudent: React.FC = () => {
       <div className="mb-6">
         <Link to="/students" className="inline-flex items-center text-blue-600 hover:text-blue-800">
           <ArrowLeft size={16} className="mr-1" />
-          Back to Students
+          Voltar para Alunos
         </Link>
       </div>
       
-      <h1 className="text-2xl font-semibold text-gray-900 mb-6">Add New Student</h1>
+      <h1 className="text-2xl font-semibold text-gray-900 mb-6">Adicionar Novo Aluno</h1>
       
       <Card>
         <form onSubmit={handleSubmit}>
           <Input
-            label="Student Name"
-            placeholder="Enter the student's full name"
+            label="Nome do Aluno"
+            placeholder="Digite o nome completo do aluno"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            required
+          />
+          
+          <Input
+            label="Sala"
+            placeholder="Ex: 9º Ano A"
+            value={classroom}
+            onChange={(e) => setClassroom(e.target.value)}
             required
           />
           
@@ -70,7 +80,7 @@ const AddStudent: React.FC = () => {
               isLoading={isSubmitting}
               icon={<Save size={18} />}
             >
-              Save Student
+              Salvar Aluno
             </Button>
           </div>
         </form>

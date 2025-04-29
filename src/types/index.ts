@@ -24,6 +24,7 @@ export interface Question {
 export interface Student {
   id: string;
   name: string;
+  classroom: string;
 }
 
 export interface Result {

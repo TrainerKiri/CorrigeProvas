@@ -25,17 +25,17 @@ const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
       
       if (mode === 'login') {
         const { error } = await signIn(email, password);
-        if (error) errorMessage = error.message;
+        if (error) errorMessage = 'Email ou senha inválidos';
       } else {
         const { error } = await signUp(email, password);
-        if (error) errorMessage = error.message;
+        if (error) errorMessage = 'Erro ao criar conta. Tente novamente.';
       }
       
       if (errorMessage) {
         setError(errorMessage);
       }
     } catch (err) {
-      setError('An unexpected error occurred. Please try again.');
+      setError('Ocorreu um erro inesperado. Tente novamente.');
       console.error(err);
     } finally {
       setLoading(false);
@@ -47,7 +47,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
       <div className="flex items-center justify-center mb-6">
         <User size={36} className="text-blue-600" />
         <h1 className="text-2xl font-bold text-gray-900 ml-2">
-          {mode === 'login' ? 'Sign in to ExamGrader' : 'Create your account'}
+          {mode === 'login' ? 'Entrar no Sistema' : 'Criar sua conta'}
         </h1>
       </div>
       
@@ -64,8 +64,8 @@ const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
       <form onSubmit={handleSubmit}>
         <Input
           type="email"
-          label="Email address"
-          placeholder="teacher@school.edu"
+          label="Email"
+          placeholder="professor@escola.com"
           icon={<Mail size={18} className="text-gray-400" />}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -74,7 +74,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
         
         <Input
           type="password"
-          label="Password"
+          label="Senha"
           placeholder="••••••••"
           icon={<Lock size={18} className="text-gray-400" />}
           value={password}
@@ -89,7 +89,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
           className="w-full mt-4"
           isLoading={loading}
         >
-          {mode === 'login' ? 'Sign in' : 'Sign up'}
+          {mode === 'login' ? 'Entrar' : 'Cadastrar'}
         </Button>
       </form>
       
@@ -97,16 +97,16 @@ const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
         <p className="text-sm text-gray-600">
           {mode === 'login' ? (
             <>
-              Don't have an account?{' '}
+              Não tem uma conta?{' '}
               <a href="/register" className="font-medium text-blue-600 hover:text-blue-500">
-                Sign up
+                Cadastre-se
               </a>
             </>
           ) : (
             <>
-              Already have an account?{' '}
+              Já tem uma conta?{' '}
               <a href="/login" className="font-medium text-blue-600 hover:text-blue-500">
-                Sign in
+                Entrar
               </a>
             </>
           )}

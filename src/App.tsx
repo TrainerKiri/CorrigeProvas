@@ -12,6 +12,7 @@ import CreateExam from './pages/CreateExam';
 import ExamDetail from './pages/ExamDetail';
 import PrintAnswerSheet from './pages/PrintAnswerSheet';
 import GradeExams from './pages/GradeExams';
+import GradeExamPhoto from './pages/GradeExamPhoto';
 import StudentList from './pages/StudentList';
 import AddStudent from './pages/AddStudent';
 import Analytics from './pages/Analytics';
@@ -59,6 +60,7 @@ const AppRoutes: React.FC = () => {
       <Route path="/exams/:id" element={<ProtectedRoute element={<ExamDetail />} />} />
       <Route path="/exams/:id/print" element={<ProtectedRoute element={<PrintAnswerSheet />} />} />
       <Route path="/exams/:id/grade" element={<ProtectedRoute element={<GradeExams />} />} />
+      <Route path="/exams/:id/grade-photo" element={<ProtectedRoute element={<GradeExamPhoto />} />} />
       
       <Route path="/students" element={<ProtectedRoute element={<StudentList />} />} />
       <Route path="/students/new" element={<ProtectedRoute element={<AddStudent />} />} />
